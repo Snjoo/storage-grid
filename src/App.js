@@ -17,29 +17,42 @@ class StorageGrid extends Component {
   }
   componentDidMount() {
     const cachedData = localStorage.getItem('storageGrid');
-    console.log(cachedData)
     if (cachedData) {
       this.setState({ grid: JSON.parse(cachedData) });
       return;
     }
   }
+  serialExists(serial) {
+    let found = false
+    this.state.grid.map(category => {
+      if(category.serial === serial) {
+        found = true
+      }
+      return null
+    })
+    return found
+  }
   onScan(event) {
     event.preventDefault()
+    this.setState({addedToGrid: false, foundCategory: null})
     this.state.grid.map(category => {
-      if(category.serials.findIndex(k => k === this.state.inputText) !== -1) {
+      if(category.serial === this.state.inputText) {
         this.setState({foundCategory: category.name})
-        return
+        return true
       }
+      return true
     })
     if (this.state.addToGrid && !this.state.foundCategory) {
-      const newGrid = [{name: 'A1', serials: ['ASDASD', 'BKBKBKKB']}]
-      this.setState({grid: newGrid})
-      localStorage.setItem('storageGrid', JSON.stringify(newGrid));
+      let newGrid = this.state.grid
+      if(!this.serialExists(this.state.inputText) && this.state.inputText.length > 0) {
+        newGrid.push({name: this.state.category, serial: this.state.inputText})
+        this.setState({grid: newGrid, addedToGrid: true})
+        localStorage.setItem('storageGrid', JSON.stringify(newGrid));
+      }
     }
     this.setState({lastScanned: this.state.inputText})
     this.setState({
-      inputText: '',
-      addedToGrid: false
+      inputText: ''
     })
   }
   render() {
@@ -63,8 +76,7 @@ class StorageGrid extends Component {
               placeholder="Serial number"
               value={this.state.inputText}
               onChange={(event) => this.setState({
-                inputText: event.target.value,
-                foundCategory: null
+                inputText: event.target.value
               })}
             />
             <button className="scanButton">Scan</button>
@@ -78,15 +90,14 @@ class StorageGrid extends Component {
         {this.state.lastScanned && !this.state.addedToGrid && this.state.foundCategory && <p>Found in category {this.state.foundCategory}</p>}
         {this.state.lastScanned && !this.state.addedToGrid && !this.state.foundCategory && <p>{this.state.lastScanned} not found</p>}
         {this.state.lastScanned && this.state.addedToGrid && <p>{this.state.lastScanned} added to category {this.state.category}</p>}
-        {this.state.grid.map(category => {
-          const categorySerials = category.serials ? category.serials.map(serial => <p className="gridSerial" key={serial}>{serial}</p>) : null
-          return (
-            <div className="showGrid">
-              <p className="gridCategoryName">{category.name}</p>
-              {categorySerials}
-            </div>
+          {this.state.grid.map(category => {
+            return (
+              <div className="showGrid" key={category.serial}>
+                <p className="gridCategoryName">{category.name}</p>
+                <p className="gridSerial">{category.serial}</p>
+              </div>
+            )}
           )}
-        )}
       </div>
     );
   }

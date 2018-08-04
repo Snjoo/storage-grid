@@ -16,6 +16,7 @@ class StorageGrid extends Component {
     }
   }
   componentDidMount() {
+    this.scanInput.focus()
     const cachedData = localStorage.getItem('storageGrid');
     if (cachedData) {
       this.setState({ grid: JSON.parse(cachedData) });
@@ -74,6 +75,7 @@ class StorageGrid extends Component {
               type="text"
               className="scanInput"
               placeholder="Serial number"
+              ref={(input) => {this.scanInput = input}}
               value={this.state.inputText}
               onChange={(event) => this.setState({
                 inputText: event.target.value

@@ -1,0 +1,76 @@
+.storageGrid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.logo {
+  height: 80px;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: white;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.title {
+  display: flex;
+  align-self: center;
+  color: black;
+  font-size: 1.5em;
+}
+
+.scan {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.scanInput {
+  height: 30px;
+  border-radius: 5px;
+  width: 200px;
+  font-size: 1em;
+  margin-left: 5px;
+}
+
+.categoryInput {
+  height: 30px;
+  border-radius: 5px;
+  width: 50px;
+  font-size: 1em;
+}
+
+.scanButton {
+  border-radius: 5px;
+  color: white;
+  background-color: black;
+  height: 36px;
+  width: 100px;
+  margin-left: 5px;
+  border: none;
+  font-size: 1em;
+}
+
+.addToGrid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addCheckBox {
+  margin-top: 15px;
+  transform: scale(1.5);
+}
+
+.addCheckBoxLabel {
+  margin-top: 10px;
+  margin-right: 5px;
+}

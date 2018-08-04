@@ -68,7 +68,7 @@ class StorageGrid extends Component {
               type="text"
               className="categoryInput"
               value={this.state.category}
-              onChange={(event) => this.setState({category: event.target.value})}
+              onChange={(event) => this.setState({category: event.target.value, foundCategory: null})}
             />
             <input
               type="text"
@@ -90,7 +90,7 @@ class StorageGrid extends Component {
         {this.state.lastScanned && !this.state.addedToGrid && this.state.foundCategory && <p>Found in category {this.state.foundCategory}</p>}
         {this.state.lastScanned && !this.state.addedToGrid && !this.state.foundCategory && <p>{this.state.lastScanned} not found</p>}
         {this.state.lastScanned && this.state.addedToGrid && <p>{this.state.lastScanned} added to category {this.state.category}</p>}
-          {this.state.grid.map(category => {
+          {this.state.grid.slice(-10).reverse().map(category => {
             return (
               <div className="showGrid" key={category.serial}>
                 <p className="gridCategoryName">{category.name}</p>

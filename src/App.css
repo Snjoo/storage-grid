@@ -92,3 +92,8 @@
   margin: 0;
   font-size: 0.8em;
 }
+
+.foundText {
+  font-size: 2em;
+  margin-top: 0;
+}

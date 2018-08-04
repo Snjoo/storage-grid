@@ -25,23 +25,22 @@ class StorageGrid extends Component {
   }
   onScan(event) {
     event.preventDefault()
-    this.setState({
-      lastScanned: this.state.inputText,
-      inputText: '',
-      foundCategory: null,
-      addedToGrid: false
-    })
     this.state.grid.map(category => {
-      if(category.serials.findIndex(this.state.lastScanned) !== -1) {
+      if(category.serials.findIndex(k => k === this.state.inputText) !== -1) {
         this.setState({foundCategory: category.name})
+        return
       }
     })
     if (this.state.addToGrid && !this.state.foundCategory) {
-      this.setState({grid: ['lol': 'lol']})
-      console.log(this.state.grid))
-      console.log(JSON.stringify(this.state.grid))
-      localStorage.setItem('storageGrid', JSON.stringify(this.state.grid));
+      const newGrid = [{name: 'A1', serials: ['ASDASD', 'BKBKBKKB']}]
+      this.setState({grid: newGrid})
+      localStorage.setItem('storageGrid', JSON.stringify(newGrid));
     }
+    this.setState({lastScanned: this.state.inputText})
+    this.setState({
+      inputText: '',
+      addedToGrid: false
+    })
   }
   render() {
     return (
@@ -63,7 +62,10 @@ class StorageGrid extends Component {
               className="scanInput"
               placeholder="Serial number"
               value={this.state.inputText}
-              onChange={(event) => this.setState({inputText: event.target.value})}
+              onChange={(event) => this.setState({
+                inputText: event.target.value,
+                foundCategory: null
+              })}
             />
             <button className="scanButton">Scan</button>
           </div>
@@ -76,7 +78,15 @@ class StorageGrid extends Component {
         {this.state.lastScanned && !this.state.addedToGrid && this.state.foundCategory && <p>Found in category {this.state.foundCategory}</p>}
         {this.state.lastScanned && !this.state.addedToGrid && !this.state.foundCategory && <p>{this.state.lastScanned} not found</p>}
         {this.state.lastScanned && this.state.addedToGrid && <p>{this.state.lastScanned} added to category {this.state.category}</p>}
-        <p>{this.state.grid}</p>
+        {this.state.grid.map(category => {
+          const categorySerials = category.serials ? category.serials.map(serial => <p className="gridSerial" key={serial}>{serial}</p>) : null
+          return (
+            <div className="showGrid">
+              <p className="gridCategoryName">{category.name}</p>
+              {categorySerials}
+            </div>
+          )}
+        )}
       </div>
     );
   }

@@ -7,7 +7,8 @@
 
 .logo {
   max-height: 80px;
-  max-width: 100%;
+  width: 100%;
+  object-fit: contain;
 }
 
 .header {
@@ -32,6 +33,19 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+@media only screen and (max-width: 500px) {
+  .scan {
+    flex-direction: column;
+  }
+
+  .scanInput,
+  .categoryInput,
+  .scanButton
+   {
+    margin-bottom: 10px;
+  }
 }
 
 .scanInput {

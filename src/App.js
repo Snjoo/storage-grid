@@ -65,12 +65,14 @@ class StorageGrid extends Component {
         </header>
         <form onSubmit={(e) => this.onScan(e)}>
           <div className="scan">
-            <input
-              type="text"
-              className="categoryInput"
-              value={this.state.category}
-              onChange={(event) => this.setState({category: event.target.value, foundCategory: null})}
-            />
+            {this.state.addToGrid &&
+              <input
+                type="text"
+                className="categoryInput"
+                value={this.state.category}
+                onChange={(event) => this.setState({category: event.target.value, foundCategory: null})}
+              />
+            }
             <input
               type="text"
               className="scanInput"
@@ -85,7 +87,7 @@ class StorageGrid extends Component {
           </div>
           <div className="addToGrid">
             <label className="addCheckBoxLabel" htmlFor="addCheckBox">Add to grid</label>
-            <input className="addCheckBox" id="addToGrid" type="checkbox" value={this.state.addToGrid} onChange={(e) => this.setState({addToGrid: e.target.value})}></input>
+            <input className="addCheckBox" id="addToGrid" type="checkbox" value={this.state.addToGrid} onChange={() => this.setState({addToGrid: !this.state.addToGrid})}></input>
           </div>
         </form>
         {this.state.lastScanned && <p>Scanned serialnumber {this.state.lastScanned}</p>}

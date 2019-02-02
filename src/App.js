@@ -95,6 +95,7 @@ class StorageGrid extends Component {
         {this.state.lastScanned && !this.state.addedToGrid && this.state.foundCategory && <p className="foundText">{this.state.foundCategory}</p>}
         {this.state.lastScanned && !this.state.addedToGrid && !this.state.foundCategory && <p className="infoText">{this.state.lastScanned} not found</p>}
         {this.state.lastScanned && this.state.addedToGrid && <p className="infoText">{this.state.lastScanned} added to category {this.state.category}</p>}
+        {this.state.grid.length > 0 && <p>Latest additions to grid</p>}
         {this.state.grid.slice(-10).reverse().map(category => {
           return (
             <div className="showGrid" key={category.serial}>

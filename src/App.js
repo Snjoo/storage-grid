@@ -91,10 +91,10 @@ class StorageGrid extends Component {
           </div>
         </form>
         {this.state.lastScanned && <p>Scanned serialnumber {this.state.lastScanned}</p>}
-        {this.state.lastScanned && !this.state.addedToGrid && this.state.foundCategory && <p className="foundText">Found in category</p>}
-        {this.state.lastScanned && !this.state.addedToGrid && this.state.foundCategory && <p className="foundTextBig">{this.state.foundCategory}</p>}
-        {this.state.lastScanned && !this.state.addedToGrid && !this.state.foundCategory && <p className="foundText">{this.state.lastScanned} not found</p>}
-        {this.state.lastScanned && this.state.addedToGrid && <p>{this.state.lastScanned} added to category {this.state.category}</p>}
+        {this.state.lastScanned && !this.state.addedToGrid && this.state.foundCategory && <p className="infoText">Found in category</p>}
+        {this.state.lastScanned && !this.state.addedToGrid && this.state.foundCategory && <p className="foundText">{this.state.foundCategory}</p>}
+        {this.state.lastScanned && !this.state.addedToGrid && !this.state.foundCategory && <p className="infoText">{this.state.lastScanned} not found</p>}
+        {this.state.lastScanned && this.state.addedToGrid && <p className="infoText">{this.state.lastScanned} added to category {this.state.category}</p>}
         {this.state.grid.slice(-10).reverse().map(category => {
           return (
             <div className="showGrid" key={category.serial}>

@@ -70,7 +70,7 @@ class StorageGrid extends Component {
                 type="text"
                 className="categoryInput"
                 value={this.state.category}
-                onChange={(event) => this.setState({category: event.target.value, foundCategory: null})}
+                onChange={(event) => this.setState({category: event.target.value, foundCategory: null, addedToGrid: false, lastScanned: ''})}
               />
             }
             <input

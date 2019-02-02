@@ -6,7 +6,8 @@
 }
 
 .logo {
-  height: 80px;
+  max-height: 80px;
+  max-width: 100%;
 }
 
 .header {

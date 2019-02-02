@@ -26,14 +26,10 @@ class StorageGrid extends Component {
   }
 
   serialExists(serial) {
-    let found = false
-    this.state.grid.map(category => {
-      if(category.serial === serial) {
-        found = true
-      }
-      return null
-    })
-    return found
+    const foundCategory = this.state.grid.find(category => category.serial === serial);
+    if (foundCategory) {
+      return true;
+    } return false;
   }
 
   onScan(event) {
@@ -95,16 +91,16 @@ class StorageGrid extends Component {
         {this.state.lastScanned && <p>Scanned serialnumber {this.state.lastScanned}</p>}
         {this.state.lastScanned && !this.state.addedToGrid && this.state.foundCategory && <p className="foundText">Found in category</p>}
         {this.state.lastScanned && !this.state.addedToGrid && this.state.foundCategory && <p className="foundTextBig">{this.state.foundCategory}</p>}
-        {this.state.lastScanned && !this.state.addedToGrid && !this.state.foundCategory && <p>{this.state.lastScanned} not found</p>}
+        {this.state.lastScanned && !this.state.addedToGrid && !this.state.foundCategory && <p className="foundText">{this.state.lastScanned} not found</p>}
         {this.state.lastScanned && this.state.addedToGrid && <p>{this.state.lastScanned} added to category {this.state.category}</p>}
-          {this.state.grid.slice(-10).reverse().map(category => {
-            return (
-              <div className="showGrid" key={category.serial}>
-                <p className="gridCategoryName">{category.name}</p>
-                <p className="gridSerial">{category.serial}</p>
-              </div>
-            )}
+        {this.state.grid.slice(-10).reverse().map(category => {
+          return (
+            <div className="showGrid" key={category.serial}>
+              <p className="gridCategoryName">{category.name}</p>
+              <p className="gridSerial">{category.serial}</p>
+            </div>
           )}
+        )}
       </div>
     );
   }

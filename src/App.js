@@ -15,6 +15,7 @@ class StorageGrid extends Component {
       addedToGrid: false
     }
   }
+
   componentDidMount() {
     this.scanInput.focus()
     const cachedData = localStorage.getItem('storageGrid');
@@ -23,6 +24,7 @@ class StorageGrid extends Component {
       return;
     }
   }
+
   serialExists(serial) {
     let found = false
     this.state.grid.map(category => {
@@ -33,6 +35,7 @@ class StorageGrid extends Component {
     })
     return found
   }
+
   onScan(event) {
     event.preventDefault()
     this.setState({addedToGrid: false, foundCategory: null})
@@ -56,6 +59,7 @@ class StorageGrid extends Component {
       inputText: ''
     })
   }
+
   render() {
     return (
       <div className="storageGrid">
@@ -89,7 +93,8 @@ class StorageGrid extends Component {
           </div>
         </form>
         {this.state.lastScanned && <p>Scanned serialnumber {this.state.lastScanned}</p>}
-        {this.state.lastScanned && !this.state.addedToGrid && this.state.foundCategory && <p className="foundText">Found in category {this.state.foundCategory}</p>}
+        {this.state.lastScanned && !this.state.addedToGrid && this.state.foundCategory && <p className="foundText">Found in category</p>}
+        {this.state.lastScanned && !this.state.addedToGrid && this.state.foundCategory && <p className="foundTextBig">{this.state.foundCategory}</p>}
         {this.state.lastScanned && !this.state.addedToGrid && !this.state.foundCategory && <p>{this.state.lastScanned} not found</p>}
         {this.state.lastScanned && this.state.addedToGrid && <p>{this.state.lastScanned} added to category {this.state.category}</p>}
           {this.state.grid.slice(-10).reverse().map(category => {
